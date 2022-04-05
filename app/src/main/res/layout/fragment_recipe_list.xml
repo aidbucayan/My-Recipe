@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.ui.recipe_list.RecipeListFragment"
     android:orientation="vertical">
 
-    <SearchView
+    <EditText
+        android:id="@+id/recipe_list_search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="40dp"
+        android:gravity="center|start"
+        android:layout_gravity="center"
+        android:hint="@string/search"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        android:textSize="14sp"/>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        shimmer:duration="800"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include layout="@layout/row_recipe_shimmer"/>
+            <include layout="@layout/row_recipe_shimmer"/>
+            <include layout="@layout/row_recipe_shimmer"/>
+            <include layout="@layout/row_recipe_shimmer"/>
+            <include layout="@layout/row_recipe_shimmer"/>
+            <include layout="@layout/row_recipe_shimmer"/>
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/recipe_list_recycler_swipe"
@@ -20,7 +53,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
            <!-- <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/sub_category_top_element_recycler"
                 android:layout_width="match_parent"
@@ -30,29 +62,7 @@
                 android:orientation="horizontal"
                 android:scrollbars="horizontal" />-->
 
-         <!--   <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmer_view_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:orientation="vertical"
-                android:layout_below="@+id/sub_category_top_element_recycler"
-                shimmer:duration="800"
-                tools:ignore="MissingConstraints">
-                &lt;!&ndash; rows placeholder &ndash;&gt;
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <include layout="@layout/row_sub_category_items_shimmer"/>
-                    <include layout="@layout/row_sub_category_items_shimmer"/>
-                    <include layout="@layout/row_sub_category_items_shimmer"/>
-                    <include layout="@layout/row_sub_category_items_shimmer"/>
-                    <include layout="@layout/row_sub_category_items_shimmer"/>
-                    <include layout="@layout/row_sub_category_items_shimmer"/>
-                </LinearLayout>
 
-            </com.facebook.shimmer.ShimmerFrameLayout>-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recipe_list_recycler"
@@ -61,7 +71,6 @@
                 android:background="@color/white"
                 android:foregroundGravity="right"
                 android:orientation="horizontal"
-                android:paddingBottom="60dp"
                 android:scrollbars="vertical" />
 
         </RelativeLayout>

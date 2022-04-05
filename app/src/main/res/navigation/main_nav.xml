@@ -10,7 +10,7 @@
         android:label="fragment_recipe_list"
         tools:layout="@layout/fragment_recipe_list">
         <action
-            android:id="@+id/action_splashScreenFragment_to_recipeFragment"
+            android:id="@+id/action_recipeListFragment_to_recipeFragment"
             app:destination="@id/recipeFragment" />
     </fragment>
 

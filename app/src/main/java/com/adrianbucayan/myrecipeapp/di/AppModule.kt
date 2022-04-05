@@ -6,6 +6,7 @@ import com.adrianbucayan.myrecipeapp.BuildConfig
 import com.adrianbucayan.myrecipeapp.data.remote.MyRecipeApi
 import com.adrianbucayan.myrecipeapp.data.repository.MyRecipeRepositoryImpl
 import com.adrianbucayan.myrecipeapp.domain.repository.MyRecipeRepository
+import com.adrianbucayan.myrecipeapp.presentation.util.Utils
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -60,16 +61,10 @@ object AppModule {
         return "Token 9c8b06d329136da358c2d00e76946b0111ce2c48"
     }
 
-    /*@Singleton
+    @Singleton
     @Provides
     fun provideUtils(@ApplicationContext context: Context): Utils {
         return Utils(context)
     }
-
-    @Singleton
-    @Provides
-    fun provideAppPrefs(@ApplicationContext context: Context): AppPrefs {
-        return AppPrefs(context)
-    }*/
 
 }
