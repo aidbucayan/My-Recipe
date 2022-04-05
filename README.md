@@ -10,13 +10,13 @@ Design Pattern
 The project used MVI and Repository design pattern approach. State in app is defined by user's action which is called intent (not the android Intent class) which the ViewModel will get and decide the state to be reflected to the View. Intent represents an intention or a desire to perform an action, either by the user or the app itself. For every action, a View receives an Intent. The Presenter observes the Intent, and Models translate it into a new state.
 
 ## Libraries
-- [Jetpack Hilt] - Dependency injection
-- [Retrofit]  - API http network requests.
-- [OkHttp] - Use as http client for logging interceptor.
-- [Jackson] - JSON serialization.
-- [Timber] - Logging and crash reports.
-- [Glide] - Image loader to views.
-- [Material] Design - Google's material design ui.                                                                                                                          
+- [Jetpack Hilt](https://dagger.dev/hilt/) - Dependency injection
+- [Retrofit](https://square.github.io/retrofit/)  - API http network requests.
+- [OkHttp](https://square.github.io/okhttp/) - Use as http client for logging interceptor.
+- [Jackson](https://github.com/square/retrofit/tree/master/retrofit-converters/jackson) - JSON serialization.
+- [Timber](https://github.com/JakeWharton/timber) - Logging and crash reports.
+- [Glide](https://github.com/bumptech/glide) - Image loader to views.
+- [Material](https://material.io/) Design - Google's material design ui.                                                                                                                          
 ## Setup
 Run the following command to build the project
 ```sh
