@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.recipe_list.RecipeListFragment"
+    android:orientation="vertical">
+
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/recipe_list_recycler_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+           <!-- <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sub_category_top_element_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal" />-->
+
+         <!--   <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_below="@+id/sub_category_top_element_recycler"
+                shimmer:duration="800"
+                tools:ignore="MissingConstraints">
+                &lt;!&ndash; rows placeholder &ndash;&gt;
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <include layout="@layout/row_sub_category_items_shimmer"/>
+                    <include layout="@layout/row_sub_category_items_shimmer"/>
+                    <include layout="@layout/row_sub_category_items_shimmer"/>
+                    <include layout="@layout/row_sub_category_items_shimmer"/>
+                    <include layout="@layout/row_sub_category_items_shimmer"/>
+                    <include layout="@layout/row_sub_category_items_shimmer"/>
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recipe_list_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:foregroundGravity="right"
+                android:orientation="horizontal"
+                android:paddingBottom="60dp"
+                android:scrollbars="vertical" />
+
+        </RelativeLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
