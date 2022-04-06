@@ -18,7 +18,7 @@ The project used MVI and Repository design pattern approach. State in app is def
 - [Glide](https://github.com/bumptech/glide) - Image loader to views.
 - [Material](https://material.io/) Design - Google's material design ui.                                                                                               
 
-- [Coutine Flow] (https://developer.android.com/kotlin/flow) - In coroutines, a flow is a type that can emit multiple values sequentially 
+- [Coutine Flow](https://developer.android.com/kotlin/flow) - In coroutines, a flow is a type that can emit multiple values sequentially 
                            
 ## Setup
 Run the following command to build the project
