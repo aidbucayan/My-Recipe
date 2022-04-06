@@ -16,7 +16,8 @@ The project used MVI and Repository design pattern approach. State in app is def
 - [Jackson](https://github.com/square/retrofit/tree/master/retrofit-converters/jackson) - JSON serialization.
 - [Timber](https://github.com/JakeWharton/timber) - Logging and crash reports.
 - [Glide](https://github.com/bumptech/glide) - Image loader to views.
-- [Material](https://material.io/) Design - Google's material design ui.                                                                                                                          
+- [Material](https://material.io/) Design - Google's material design ui.                                                                                               - [Coutine Flow] (https://developer.android.com/kotlin/flow) - In coroutines, a flow is a type that can emit multiple values sequentially 
+                           
 ## Setup
 Run the following command to build the project
 ```sh
