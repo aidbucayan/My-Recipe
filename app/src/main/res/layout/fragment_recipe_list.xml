@@ -53,17 +53,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-           <!-- <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/sub_category_top_element_recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:scrollbars="horizontal" />-->
-
-
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recipe_list_recycler"
                 android:layout_width="match_parent"

@@ -9,8 +9,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adrianbucayan.myrecipeapp.R
@@ -28,7 +27,6 @@ import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 
-
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
@@ -38,12 +36,9 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
     private val binding get() = _binding!!
     @Inject
     @Named("auth_token") lateinit var token: String
-    @Inject
-    lateinit var utils: Utils
     private var recipeListAdapter : RecipeListAdapter? = null
     private var page : Int? = 1
     private var totalItemCount: Int = 0
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -60,9 +55,13 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
 
         binding.recipeListSearch.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE) {
-                utils.hideKeyboard(requireActivity(), v)
-                page = 1
-                apiCall(page, query = binding.recipeListSearch.text.toString())
+                if(Utils.isLetters(binding.recipeListSearch.text.toString())) {
+                    Utils.hideKeyboard(requireActivity(), v)
+                    page = 1
+                    apiCall(page, query = binding.recipeListSearch.text.toString())
+                } else {
+                    Utils.longToast(requireContext().applicationContext, getString(R.string.search_only_accepts_letters))
+                }
                 return@OnEditorActionListener true
             }
             false
@@ -100,11 +99,10 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
 
                     var limitOffset = page?.times(PAGE_SIZE)
                     Timber.e("listItemIndex = %s", listItemIndex)
-                    Timber.e("Page count * 30 < totalItemCount = ", (limitOffset!! < totalItemCount))
 
                     if (binding.shimmerViewContainer.visibility == View.GONE
-                        && lastVisibleItemPosition == listItemIndex
-                        && limitOffset < totalItemCount) {
+                        && (lastVisibleItemPosition + 5) == listItemIndex
+                        && limitOffset!! < totalItemCount) {
                         //displayLoadMoreProgressBar(true)
                         var newPage = page?.plus(1)
                         apiCall(newPage)
@@ -122,31 +120,37 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
     }
 
     private fun toSelectRecipe(recipe: Recipe, i: Int) {
-        val navController: NavController =
-            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main)
         val bundle = Bundle()
         bundle.putParcelable(Constants.RECIPE, recipe)
-        navController.navigate(R.id.action_recipeListFragment_to_recipeFragment, bundle)
+        findNavController().navigate(R.id.action_recipeListFragment_to_recipeFragment, bundle)
     }
 
     private fun apiCall(mPage: Int?) {
-        recipeViewModel.setGetRecipeEvent(
-            GetRecipeEvent.GetGetRecipeEvents,
-            SearchRecipeRequest(token,
-                mPage,
-                ""
+        if(!Utils.isNetworkAvailable(requireActivity().applicationContext)) {
+            Utils.longToast(requireActivity().applicationContext, getString(R.string.network_unavailable))
+        } else {
+            recipeViewModel.setGetRecipeEvent(
+                GetRecipeEvent.GetGetRecipeEvents,
+                SearchRecipeRequest(token,
+                    mPage,
+                    ""
+                )
             )
-        )
+        }
     }
 
     private fun apiCall(mPage: Int?, query: String) {
-        recipeViewModel.setGetRecipeEvent(
-            GetRecipeEvent.GetGetRecipeEvents,
-            SearchRecipeRequest(token,
-                mPage,
-                query
+        if(!Utils.isNetworkAvailable(requireActivity().applicationContext)) {
+            Utils.longToast(requireActivity().applicationContext, getString(R.string.network_unavailable))
+        } else {
+            recipeViewModel.setGetRecipeEvent(
+                GetRecipeEvent.GetGetRecipeEvents,
+                SearchRecipeRequest(token,
+                    mPage,
+                    query
+                )
             )
-        )
+        }
     }
 
     @SuppressLint("TimberArgCount")
@@ -178,14 +182,12 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
         if (isDisplayed) {
             binding.shimmerViewContainer.visibility = View.VISIBLE
             binding.shimmerViewContainer.startShimmer()
-        }
-        else {
+        } else {
             if(binding.recipeListRecyclerSwipe.isRefreshing)
                 binding.recipeListRecyclerSwipe.isRefreshing = false
             binding.shimmerViewContainer.stopShimmer()
             binding.shimmerViewContainer.visibility = View.GONE
         }
     }
-
 
 }

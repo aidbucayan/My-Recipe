@@ -71,8 +71,7 @@ class RecipeListAdapter : BaseRecyclerViewAdapter<Recipe, RowRecipeBinding>() ,
 @ExperimentalCoroutinesApi
 class SubDiscoveryItemsAdapterViewHolder(
     viewBinding: RowRecipeBinding,
-    private val toSelectRecipe: ((Recipe, Int) -> Unit)?
-) : BaseViewHolder<Recipe, RowRecipeBinding>(viewBinding) {
+    private val toSelectRecipe: ((Recipe, Int) -> Unit)? ) : BaseViewHolder<Recipe, RowRecipeBinding>(viewBinding) {
 
     private val title : TextView = viewBinding.rowRecipeTitle
     private val rating : TextView = viewBinding.rowRecipeRating
@@ -83,7 +82,7 @@ class SubDiscoveryItemsAdapterViewHolder(
     override fun setViews(recipe: Recipe) {
         super.setViews(recipe)
 
-        title.text = recipe.title?.let { stripHtml(it) }
+        title.text = recipe.title?.let { Utils.stripHtml(it) }
         rating.text = recipe.rating.toString()
 
         if(!recipe.featuredImage.isNullOrEmpty()) {
@@ -100,13 +99,7 @@ class SubDiscoveryItemsAdapterViewHolder(
 
     }
 
-    fun stripHtml(html: String): String {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY).toString()
-        } else {
-            Html.fromHtml(html).toString()
-        }
-    }
+
 
 }
 

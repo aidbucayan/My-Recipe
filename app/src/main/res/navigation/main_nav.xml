@@ -18,10 +18,6 @@
         android:id="@+id/recipeFragment"
         android:name="com.adrianbucayan.myrecipeapp.presentation.ui.recipe.RecipeFragment"
         android:label="fragment_welcome"
-        tools:layout="@layout/fragment_recipe" >
-        <action
-            android:id="@+id/action_recipeFragment_to_recipeListFragment"
-            app:destination="@id/recipeListFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_recipe" />
 
 </navigation>

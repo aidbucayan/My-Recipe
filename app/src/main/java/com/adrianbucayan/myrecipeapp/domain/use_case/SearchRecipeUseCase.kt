@@ -19,7 +19,7 @@ class SearchRecipeUseCase @Inject constructor(private val repository: MyRecipeRe
             val getRecipe = repository.search(searchRecipeRequest).toRecipeSearch()
             emit(Resource.Success<RecipeSearch>(getRecipe))
         } catch(e: HttpException) {
-            emit(Resource.Error<RecipeSearch>(e.localizedMessage))
+            emit(Resource.Error<RecipeSearch>(e.message()))
         } catch(e: IOException) {
             emit(Resource.Error<RecipeSearch>(e.localizedMessage))
         }
