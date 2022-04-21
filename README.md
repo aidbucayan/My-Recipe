@@ -45,4 +45,3 @@ Lint issues or warnings can be checked by running
 ```
 Future Updates: 
 - Room Database for data caching
-- Jetpack compose for UI 
